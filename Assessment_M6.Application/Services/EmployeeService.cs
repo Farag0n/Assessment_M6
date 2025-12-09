@@ -138,21 +138,18 @@ public class EmployeeService : IEmployeeService
                 throw new ArgumentNullException(nameof(employeeCreateDto), "Los datos del empleado son requeridos");
             }
             
-            // Validar datos básicos
             ValidateEmployeeData(employeeCreateDto);
             
             _logger.LogInformation("Creando nuevo empleado: {Name} {LastName}", 
                 employeeCreateDto.Name, employeeCreateDto.LastName);
             
-            // Verificar si el email ya existe
             var existingEmployee = await _employeeRepository.GetEmployeeByEmail(employeeCreateDto.Email);
             if (existingEmployee != null)
             {
                 _logger.LogWarning("El email {Email} ya está registrado para otro empleado", employeeCreateDto.Email);
                 throw new InvalidOperationException($"El email {employeeCreateDto.Email} ya está registrado para otro empleado");
             }
-
-            // Verificar si el número de documento ya existe
+            
             var allEmployees = await _employeeRepository.GetAllEmployees();
             var existingDocNumber = allEmployees.FirstOrDefault(e => e.DocNumber == employeeCreateDto.DocNumber);
             if (existingDocNumber != null)
@@ -289,7 +286,7 @@ public class EmployeeService : IEmployeeService
                 return null;
             }
             
-            // Asegurarse de que el departamento está cargado
+            //Make sure the department is loaded
             await LoadDepartmentData(updatedEmployee);
             
             _logger.LogInformation("Empleado con ID {Id} actualizado exitosamente", employeeUpdateDto.Id);
@@ -375,8 +372,7 @@ public class EmployeeService : IEmployeeService
                 employee.Id, ex.Message);
         }
     }
-
-    // Método auxiliar para validar datos del empleado
+    
     private void ValidateEmployeeData(object employeeDto)
     {
         if (employeeDto == null) return;
@@ -425,8 +421,7 @@ public class EmployeeService : IEmployeeService
             }
         }
     }
-
-    //Validate email format
+    
     private bool IsValidEmail(string email)
     {
         try
@@ -439,8 +434,7 @@ public class EmployeeService : IEmployeeService
             return false;
         }
     }
-
-    // Mapeo de Entity a DTO
+    
     private EmployeeDtos.EmployeeResponseDto MapToEmployeeResponseDto(Employee employee)
     {
         var dto = new EmployeeDtos.EmployeeResponseDto

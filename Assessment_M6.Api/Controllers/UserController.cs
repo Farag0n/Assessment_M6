@@ -37,7 +37,7 @@ public class UserController : ControllerBase
         }
     }
     
-    [HttpGet("{id:int}")] // <-- Agrega :int para forzar parámetro numérico
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
         try
@@ -49,7 +49,6 @@ public class UserController : ControllerBase
 
             var currentUserId = GetCurrentUserId();
             
-            // Si no es admin, solo puede ver su propio perfil
             if (!User.IsInRole("Admin") && currentUserId != id)
             {
                 return Forbid();
@@ -87,8 +86,7 @@ public class UserController : ControllerBase
             {
                 return BadRequest(new { Message = "Email es requerido" });
             }
-
-            // DEBUG: Verificar todos los usuarios
+            
             var allUsers = await _userService.GetAllUsersAsync();
             _logger.LogInformation("Usuarios en BD: {Count}", allUsers.Count());
             foreach (var user in allUsers)
@@ -117,8 +115,7 @@ public class UserController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // POST: api/Users
+    
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] UserDtos.UserCreateDTO userCreateDto)
@@ -178,8 +175,7 @@ public class UserController : ControllerBase
                     Errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)) 
                 });
             }
-
-            // Si no es admin, solo puede actualizar su propio perfil
+            
             var currentUserId = GetCurrentUserId();
             if (!User.IsInRole("Admin") && currentUserId != id)
             {
@@ -244,8 +240,7 @@ public class UserController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // Método auxiliar para obtener el ID del usuario actual
+    
     private int GetCurrentUserId()
     {
         try

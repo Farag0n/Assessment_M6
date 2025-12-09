@@ -13,29 +13,29 @@ using Assessment_M6.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ===================== Conexion a la DB =====================
-//Se obtiene la cadena de conexion desde el appsetings.json
+// ===================== Database Connection =====================
+//The connection string is obtained from appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// ===================== Inyeccion de dependencias =====================
-// Repositorios
+// ===================== Dependency Injection =====================
+// Repositories
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// Servicios Application
+// Application Services
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-// Servicios de utilidad
+// Utility Services
 builder.Services.AddScoped<TokenService>();
 
-// ===================== Configuracion JWT =====================
-//Configura el sistema de autenticación para validar tokens JWT en las solicitudes HTTP.
+// ===================== JWT Configuration =====================
+//Configures the authentication system to validate JWT tokens on HTTP requests.
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -56,20 +56,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// ===================== Controladores y Swagger =====================
+// ===================== Controllers and Swagger =====================
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Inmobiliaria API",
+        Title = "Real Estate API",
         Version = "v1",
-        Description = "API para la administracion y gestion de una empresa inmoviliaria"
+        Description = "API for the administration and management of a real estate company"
     });
 
-
-    // Configuración del botón Authorize en Swagger(JWT)
+    // Configuration for the Authorize button in Swagger (JWT)
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -77,7 +76,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Introduce 'Bearer' deja un espacio y pon el {token}"
+        Description = "Enter 'Bearer', leave a space, and place your {token}"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -96,39 +95,36 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
-
-// ===================== Configuracion del Cors (por si me da tiempo de hacer Front) =====================
+// ===================== CORS Configuration (in case I have time to build the Frontend) =====================
 var corsPolicyName = "AllowSpecificOrigins";
 
-builder.Services.AddCors( options =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
         policy =>
         {
             policy.AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod(); // si el front envía cookies o auth headers
+                .AllowAnyMethod(); // if the frontend sends cookies or auth headers
         });
 });
 
-
-// ===================== Construcion y pipeline =====================
+// ===================== Construction and Pipeline =====================
 var app = builder.Build();
 
-// Testiar la conexion a la db para tener control de posibles errores
+// Test the DB connection to have control over possible errors
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
         db.Database.OpenConnection();
-        Console.WriteLine("Conexion a la base de datos exitosa.");
+        Console.WriteLine("Database connection successful.");
         db.Database.CloseConnection();
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Error en la conexion: {ex.Message}");
+        Console.WriteLine($"Database connection error: {ex.Message}");
     }
 }
 
@@ -137,11 +133,11 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Administracion Inmobiliaria API v1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Real Estate Administration API v1");
         c.RoutePrefix = string.Empty;
     });
 }
-//Ejecutar este comando para poder hacer pruebas locales si hay algun problema:
+//Run this command to perform local tests if any issue appears:
 //export ASPNETCORE_ENVIRONMENT=Local dotnet run --project ProductCatalog.Api
 
 app.UseHttpsRedirection();

@@ -336,16 +336,14 @@ public class UserService : IUserService
                 throw new SecurityTokenException("Token inválido");
             }
             
-            // Intenta parsear como ID (nuevos tokens)
+            
             if (int.TryParse(userIdClaim, out int userId))
             {
-                // Es un ID numérico (token nuevo)
                 user = await _userRepository.GetUserById(userId);
                 _logger.LogInformation("Buscando usuario por ID: {UserId}", userId);
             }
             else
             {
-                // Es un email (token viejo) - busca por email
                 user = await _userRepository.GetUserByEmail(userIdClaim);
                 _logger.LogInformation("Buscando usuario por email: {Email}", userIdClaim);
             }
@@ -368,7 +366,7 @@ public class UserService : IUserService
                 throw new SecurityTokenException("Refresh token expirado");
             }
 
-            // Generate new Token (con ID correcto)
+            // Generate new Token
             var newAccessToken = _tokenService.GenerateAccessToken(user.Id, user.Email, user.Role.ToString());
             var newRefreshToken = _tokenService.GenerateRefreshToken();
             var refreshTokenExpirationDays = _tokenService.GetRefreshTokenExpirationDays();

@@ -36,7 +36,7 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
             .HasMaxLength(500);
         
         //Usuario admin de prueba 
-        //No es una buena practica en entor de produccion pero para pruebas en desarrollo creo que es valido
+        //No es una buena practica en entorno de produccion pero para pruebas en desarrollo creo que es valido
         builder.HasData(new User
         {
             Id = 1,

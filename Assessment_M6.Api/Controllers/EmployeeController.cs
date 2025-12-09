@@ -27,27 +27,17 @@ public class EmployeeController : ControllerBase
     {
         try
         {
-            // DEBUG: Ver todos los claims
             Console.WriteLine("=== EMPLOYEE CONTROLLER - USER CLAIMS ===");
             foreach (var claim in User.Claims)
             {
                 Console.WriteLine($"{claim.Type}: {claim.Value}");
             }
             Console.WriteLine("=========================================");
-        
-            // En tu sistema, ¿los empleados están vinculados a usuarios?
-            // Si NO están vinculados, no podemos obtener el ID del usuario
-        
-            // Opción 1: Si los empleados NO están vinculados a usuarios
-            // Para simplificar, devolvemos 0 y manejamos la lógica diferente
-        
-            // Opción 2: Buscar el claim que tenga el ID numérico
+            
             foreach (var claim in User.Claims)
             {
-                // Intentar parsear el valor como int
                 if (int.TryParse(claim.Value, out int possibleId))
                 {
-                    // Verificar que sea un ID razonable (no un timestamp u otro número)
                     if (possibleId > 0 && possibleId < 1000000)
                     {
                         Console.WriteLine($"Found possible user ID: {possibleId} in claim: {claim.Type}");
@@ -55,12 +45,11 @@ public class EmployeeController : ControllerBase
                     }
                 }
             }
-        
-            // Opción 3: Si el usuario es admin, devolver un ID fijo para pruebas
+            
             if (User.IsInRole("Admin"))
             {
                 Console.WriteLine("User is Admin, returning admin ID 1 for testing");
-                return 1; // ID del admin para pruebas
+                return 1;
             }
         
             Console.WriteLine("No user ID found, returning 0");
@@ -294,8 +283,7 @@ public class EmployeeController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // DELETE: api/Employees/5 (Solo Admin)
+    
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteEmployee(int id)
@@ -335,6 +323,7 @@ public class EmployeeController : ControllerBase
         }
     }
     
+    //This enpoint dosen't test
     [HttpGet("me")]
     public async Task<IActionResult> GetMyProfile()
     {

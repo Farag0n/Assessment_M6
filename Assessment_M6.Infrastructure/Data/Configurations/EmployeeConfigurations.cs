@@ -37,9 +37,9 @@ public class EmployeeConfigurations : IEntityTypeConfiguration<Employee>
         builder.Property(e => e.RegisteredAt).IsRequired();
         
         builder
-            .HasOne(e => e.Department)          // Un empleado tiene un departamento
-            .WithMany(d => d.Employees)         // Un departamento tiene muchos empleados
+            .HasOne(e => e.Department)          
+            .WithMany(d => d.Employees)         
             .HasForeignKey(e => e.DepartmentId) // FK
-            .OnDelete(DeleteBehavior.Restrict); // Opcional
+            .OnDelete(DeleteBehavior.Restrict); 
     }
 }
