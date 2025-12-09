@@ -1,0 +1,8 @@
+﻿services:
+  assessment_m6.api:
+    image: assessment_m6.api
+    build:
+      context: .
+      dockerfile: Assessment_M6.Api/Dockerfile
+    ports:
+      - "8080:8080"
