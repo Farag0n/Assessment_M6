@@ -79,7 +79,7 @@ API available at: `https://localhost:5167`
 Build and run with Docker Compose:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 
