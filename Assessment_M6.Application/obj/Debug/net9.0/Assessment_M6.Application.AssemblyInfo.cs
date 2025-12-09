@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Assessment_M6.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96cfe9f97d409fe0a927d04ff333c55837e192ea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d788d699413c80d2e6c16282f3a4173a7ca25ecd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Assessment_M6.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Assessment_M6.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

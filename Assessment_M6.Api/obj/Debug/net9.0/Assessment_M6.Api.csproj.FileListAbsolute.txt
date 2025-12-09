@@ -138,3 +138,6 @@
 /home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/obj/Debug/net9.0/Assessment_M6.Api.pdb
 /home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/obj/Debug/net9.0/Assessment_M6.Api.genruntimeconfig.cache
 /home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/obj/Debug/net9.0/ref/Assessment_M6.Api.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/bin/Debug/net9.0/BouncyCastle.Cryptography.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/bin/Debug/net9.0/MailKit.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/bin/Debug/net9.0/MimeKit.dll

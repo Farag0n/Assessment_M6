@@ -52,6 +52,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.14.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -81,6 +85,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.14.0, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
@@ -167,13 +175,25 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.14.1, )"
+            },
             "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[9.0.0, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.14.0, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

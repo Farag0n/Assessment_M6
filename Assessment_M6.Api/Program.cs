@@ -1,4 +1,5 @@
 using System.Text;
+using Assessment_M6.Application.DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -33,6 +34,12 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 // Utility Services
 builder.Services.AddScoped<TokenService>();
+
+// email config
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.Configure<EmailDtos.EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 
 // ===================== JWT Configuration =====================
 //Configures the authentication system to validate JWT tokens on HTTP requests.

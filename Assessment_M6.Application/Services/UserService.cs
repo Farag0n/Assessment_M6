@@ -16,15 +16,18 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly TokenService _tokenService;
-    private readonly ILogger<UserService> _logger; // <-- CORREGIDO
+    private readonly IEmailService _emailService;
+    private readonly ILogger<UserService> _logger;
 
     public UserService(
         IUserRepository userRepository, 
-        TokenService tokenService, 
-        ILogger<UserService> logger) // <-- CORREGIDO
+        TokenService tokenService,
+        IEmailService emailService,
+        ILogger<UserService> logger)
     {
         _userRepository = userRepository;
         _tokenService = tokenService;
+        _emailService = emailService;
         _logger = logger;
     }
 
@@ -280,7 +283,7 @@ public class UserService : IUserService
         try
         {
             _logger.LogInformation("Registrando usuario: {Email}", registerDto.Email);
-            
+        
             var existingUser = await _userRepository.GetUserByEmail(registerDto.Email);
             if (existingUser != null)
             {
@@ -297,19 +300,21 @@ public class UserService : IUserService
             };
 
             await _userRepository.AddUser(user);
-            
+        
+            // Enviar email de bienvenida en segundo plano (sin await para no bloquear)
+            _ = SendWelcomeEmailInBackground(user.Email, user.Username, user.Username);
+        
             var accessToken = _tokenService.GenerateAccessToken(user.Id, user.Email, user.Role.ToString());
             var refreshToken = _tokenService.GenerateRefreshToken();
-            
+        
             var refreshTokenExpirationDays = _tokenService.GetRefreshTokenExpirationDays();
-            
-            //Save Token
+        
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryDate = DateTime.UtcNow.AddDays(refreshTokenExpirationDays);
             await _userRepository.UpdateUser(user);
 
             _logger.LogInformation("Usuario {Email} registrado exitosamente", registerDto.Email);
-            
+        
             return (accessToken, refreshToken);
         }
         catch (Exception ex)
@@ -407,5 +412,19 @@ public class UserService : IUserService
             Username = user.Username,
             Role = user.Role
         };
+    }
+    
+    private async Task SendWelcomeEmailInBackground(string toEmail, string toName, string username)
+    {
+        try
+        {
+            await _emailService.SendWelcomeEmailAsync(toEmail, toName, username);
+            _logger.LogInformation("Email de bienvenida enviado exitosamente a {Email}", toEmail);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "No se pudo enviar email de bienvenida a {Email}. Error: {ErrorMessage}", 
+                toEmail, ex.Message);
+        }
     }
 }
