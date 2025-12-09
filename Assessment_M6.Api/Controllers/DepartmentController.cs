@@ -8,7 +8,7 @@ namespace Assessment_M6.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = "Admin")] // Solo administradores pueden acceder
+[Authorize]
 public class DepartmentController : ControllerBase
 {
     private readonly IDepartmentService _departmentService;
@@ -21,8 +21,7 @@ public class DepartmentController : ControllerBase
         _departmentService = departmentService;
         _logger = logger;
     }
-
-    // GET: api/Departments
+    
     [HttpGet]
     public async Task<IActionResult> GetAllDepartments()
     {
@@ -42,8 +41,7 @@ public class DepartmentController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // GET: api/Departments/5
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDepartmentById(int id)
     {
@@ -78,8 +76,7 @@ public class DepartmentController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // GET: api/Departments/name/{name}
+    
     [HttpGet("name/{name}")]
     public async Task<IActionResult> GetDepartmentByName(string name)
     {
@@ -114,9 +111,9 @@ public class DepartmentController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // POST: api/Departments
+    
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateDepartment([FromBody] DepartmentDtos.DepartmentCreateDto departmentCreateDto)
     {
         try
@@ -164,9 +161,9 @@ public class DepartmentController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // PUT: api/Departments/5
+    
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateDepartment(int id, [FromBody] DepartmentDtos.DepartmentUpdateDto departmentUpdateDto)
     {
         try
@@ -221,9 +218,9 @@ public class DepartmentController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // DELETE: api/Departments/5
+    
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteDepartment(int id)
     {
         try

@@ -15,8 +15,7 @@ public class AuthController : ControllerBase
     {
         _userService = userService;
     }
-
-    // POST: api/Auth/login
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
@@ -40,8 +39,7 @@ public class AuthController : ControllerBase
             return Unauthorized(new { Message = ex.Message });
         }
     }
-
-    // POST: api/Auth/register
+    
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
@@ -65,8 +63,7 @@ public class AuthController : ControllerBase
             return BadRequest(new { Message = ex.Message });
         }
     }
-
-    // 🔥 NUEVO: POST: api/Auth/refresh
+    
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenDto refreshTokenDto)
     {

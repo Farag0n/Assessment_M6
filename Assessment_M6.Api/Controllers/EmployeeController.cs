@@ -8,7 +8,7 @@ namespace Assessment_M6.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize] // Todos los métodos requieren autenticación
+[Authorize]
 public class EmployeeController : ControllerBase
 {
     private readonly IEmployeeService _employeeService;
@@ -21,21 +21,18 @@ public class EmployeeController : ControllerBase
         _employeeService = employeeService;
         _logger = logger;
     }
-
-    // Método auxiliar para obtener el ID del usuario actual
+    
     private int GetCurrentUserId()
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         return userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
     }
-
-    // Método auxiliar para verificar si es admin
+    
     private bool IsAdmin()
     {
         return User.IsInRole("Admin");
     }
-
-    // GET: api/Employees (Solo Admin)
+    
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAllEmployees()
@@ -57,7 +54,7 @@ public class EmployeeController : ControllerBase
         }
     }
 
-    // GET: api/Employees/5 (Admin puede ver todos, User solo puede ver su propio empleado)
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetEmployeeById(int id)
     {
@@ -67,8 +64,7 @@ public class EmployeeController : ControllerBase
             {
                 return BadRequest(new { Message = "ID inválido" });
             }
-
-            // Si no es admin, solo puede ver su propio perfil
+            
             var currentUserId = GetCurrentUserId();
             if (!IsAdmin() && id != currentUserId)
             {
@@ -99,8 +95,7 @@ public class EmployeeController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // GET: api/Employees/email/{email} (Solo Admin)
+    
     [HttpGet("email/{email}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetEmployeeByEmail(string email)
@@ -136,8 +131,7 @@ public class EmployeeController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // POST: api/Employees (Solo Admin)
+    
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateEmployee([FromBody] EmployeeDtos.EmployeeCreateDto employeeCreateDto)
@@ -190,8 +184,7 @@ public class EmployeeController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // PUT: api/Employees/5 (Admin puede editar todos, User solo puede editar su propio perfil)
+    
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateEmployee(int id, [FromBody] EmployeeDtos.EmployeeUpdateDto employeeUpdateDto)
     {
@@ -206,8 +199,7 @@ public class EmployeeController : ControllerBase
             {
                 return BadRequest(new { Message = "El ID en la URL no coincide con el ID en el cuerpo de la solicitud" });
             }
-
-            // Si no es admin, solo puede actualizar su propio perfil
+            
             var currentUserId = GetCurrentUserId();
             if (!IsAdmin() && id != currentUserId)
             {
@@ -297,8 +289,7 @@ public class EmployeeController : ControllerBase
             return StatusCode(500, new { Message = "Error interno del servidor" });
         }
     }
-
-    // GET: api/Employees/me (Usuario obtiene su propio perfil)
+    
     [HttpGet("me")]
     public async Task<IActionResult> GetMyProfile()
     {

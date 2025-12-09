@@ -16,8 +16,7 @@ public class UserController : ControllerBase
     {
         _userService = userService;
     }
-
-    // GET: api/Users
+    
     [HttpGet]
     [Authorize(Roles = "Admin")] // Solo Admin puede ver todos los usuarios
     public async Task<IActionResult> GetAll()
@@ -25,8 +24,7 @@ public class UserController : ControllerBase
         var users = await _userService.GetAllUsersAsync();
         return Ok(users);
     }
-
-    // GET: api/Users/5
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -35,17 +33,16 @@ public class UserController : ControllerBase
         if (user == null)
             return NotFound(new { Message = "Usuario no encontrado" });
 
-        // Si no es admin, solo puede ver su propio perfil
+        //if user don't is admin only view your id
         var currentUserId = GetCurrentUserId();
         if (!User.IsInRole("Admin") && currentUserId != id)
             return Forbid();
 
         return Ok(user);
     }
-
-    // GET: api/Users/email/admin@example.com
+    
     [HttpGet("email/{email}")]
-    [Authorize(Roles = "Admin")] // Solo Admin puede buscar por email
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetByEmail(string email)
     {
         var user = await _userService.GetUserByEmailAsync(email);
@@ -56,9 +53,9 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    // POST: api/Users
+    
     [HttpPost]
-    [Authorize(Roles = "Admin")] // Solo Admin puede crear usuarios manualmente
+    //[Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] UserDtos.UserCreateDTO userCreateDto)
     {
         try
@@ -83,7 +80,7 @@ public class UserController : ControllerBase
         if (id != userUpdateDto.Id)
             return BadRequest(new { Message = "ID no coincide" });
 
-        // Si no es admin, solo puede actualizar su propio perfil
+        //if dont is admin only update your profile
         var currentUserId = GetCurrentUserId();
         if (!User.IsInRole("Admin") && currentUserId != id)
             return Forbid();
@@ -106,8 +103,7 @@ public class UserController : ControllerBase
             return BadRequest(new { Message = ex.Message });
         }
     }
-
-    // DELETE: api/Users/5
+    
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")] // Solo Admin puede eliminar usuarios
     public async Task<IActionResult> Delete(int id)
@@ -119,8 +115,7 @@ public class UserController : ControllerBase
 
         return Ok(new { Message = "Usuario eliminado exitosamente", User = deletedUser });
     }
-
-    // Método auxiliar para obtener el ID del usuario actual desde el token
+    
     private int GetCurrentUserId()
     {
         var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
