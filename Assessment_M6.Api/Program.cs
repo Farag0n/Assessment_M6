@@ -9,8 +9,7 @@ using Assessment_M6.Infrastructure.Data;
 using Assessment_M6.Infrastructure.Repositories;
 using Microsoft.OpenApi.Models;
 using Assessment_M6.Infrastructure.Extensions;
-using Assessment_M6.Infrastructure.Repositories;
-using EduTrack.Application.Services;
+using Assessment_M6.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

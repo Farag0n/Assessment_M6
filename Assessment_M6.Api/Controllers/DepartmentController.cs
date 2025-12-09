@@ -162,7 +162,7 @@ public class DepartmentController : ControllerBase
         }
     }
     
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateDepartment(int id, [FromBody] DepartmentDtos.DepartmentUpdateDto departmentUpdateDto)
     {

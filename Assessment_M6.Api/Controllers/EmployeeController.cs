@@ -55,7 +55,7 @@ public class EmployeeController : ControllerBase
     }
 
     
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetEmployeeById(int id)
     {
         try
