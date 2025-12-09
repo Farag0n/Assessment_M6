@@ -87,6 +87,8 @@ docker-compose up --build
 
 ## 📚 API Documentation
 
+`postman link: https://galactic-flare-500766.postman.co/workspace/My-Workspace~2d6559c1-dad9-46fd-8b81-976451ace927/collection/23534224-90c14f9f-a0bb-4554-84a9-c92631d2be6c?action=share&creator=23534224`
+
 ### Authentication Endpoints
 
 | Method | Endpoint           | Description        | Access        |
