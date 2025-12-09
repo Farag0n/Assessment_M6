@@ -1,0 +1,16 @@
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/bin/Debug/net9.0/Assessment_M6.Application.deps.json
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/bin/Debug/net9.0/Assessment_M6.Application.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/bin/Debug/net9.0/Assessment_M6.Application.pdb
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/bin/Debug/net9.0/Assessment_M6.Domain.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/bin/Debug/net9.0/Assessment_M6.Domain.pdb
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.csproj.AssemblyReference.cache
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.AssemblyInfoInputs.cache
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.AssemblyInfo.cs
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.csproj.CoreCompileInputs.cache
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.sourcelink.json
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessme.9EFC42BB.Up2Date
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/refint/Assessment_M6.Application.dll
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/Assessment_M6.Application.pdb
+/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Application/obj/Debug/net9.0/ref/Assessment_M6.Application.dll

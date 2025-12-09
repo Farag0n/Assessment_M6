@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Assessment_M6.Api.props" />
+</Project>
