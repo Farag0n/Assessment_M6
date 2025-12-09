@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Assessment_M6.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7881a73c9a3d24703c0aef55aa4c13bc46d220bb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7e9cce4333b9913313c24c3b64112c1643329a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Assessment_M6.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Assessment_M6.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

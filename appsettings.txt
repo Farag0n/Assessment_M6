@@ -1,13 +1,22 @@
 {
   "Jwt": {
     "Key": "79b36e142688bfd28e84c158dcb2c615",
-    "Issuer": "EduTrack",
-    "Audience": "EduTrackUsers",
+    "Issuer": "Assessment_M6",
+    "Audience": "Assessment_M6Users",
     "AccessTokenExpirationMinutes": 5,
     "RefreshTokenExpirationDays": 7
   },
   "ConnectionStrings": {
     "DefaultConnection": "server=webapi-nebula-nebula-riwi.k.aivencloud.com;port=15242;database=Assessment;user=avnadmin;password=AVNS_MptClGjsBQdRbHk6kX1;SslMode=Required;"
+  },
+  "EmailSettings": {
+    "SmtpServer": "smtp.gmail.com",
+    "SmtpPort": 587,
+    "SenderEmail": "jeniferlaespina@gmail.com",
+    "SenderName": "Assessment_M6",
+    "SmtpUsername": "jeniferlaespina@gmail.com",
+    "SmtpPassword": "LaespinaDelrosal513",
+    "UseSsl": true
   },
   "Logging": {
     "LogLevel": {
