@@ -186,22 +186,23 @@ public class EmployeeService : IEmployeeService
             _logger.LogInformation("Empleado creado exitosamente con ID: {Id}", createdEmployee.Id);
             return MapToEmployeeResponseDto(createdEmployee);
         }
-        catch (ArgumentNullException ex)
+        //se usaron varios catch para ser mas especificos
+        catch (ArgumentNullException ex)//si el parametro es null
         {
             _logger.LogError(ex, "Error de validación: {Message}", ex.Message);
             throw;
         }
-        catch (ArgumentException ex)
+        catch (ArgumentException ex)//argumento invalido
         {
             _logger.LogError(ex, "Error de validación: {Message}", ex.Message);
             throw;
         }
-        catch (InvalidOperationException ex)
+        catch (InvalidOperationException ex)//operacion no es valida
         {
             _logger.LogError(ex, "Error de operación: {Message}", ex.Message);
             throw;
         }
-        catch (Exception ex)
+        catch (Exception ex)//catch general, el original
         {
             _logger.LogError(ex, "Error al crear empleado: {Message}", ex.Message);
             throw new ApplicationException($"Error al crear empleado: {ex.Message}", ex);
@@ -426,6 +427,7 @@ public class EmployeeService : IEmployeeService
     {
         try
         {
+            //consejo de la ia para validar el formato del email
             var addr = new System.Net.Mail.MailAddress(email);
             return addr.Address == email;
         }

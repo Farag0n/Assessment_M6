@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Assessment_M6.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d788d699413c80d2e6c16282f3a4173a7ca25ecd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ac97681c7d3b51f0ec3a7d35e83ca7f2ff52bd0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Assessment_M6.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Assessment_M6.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

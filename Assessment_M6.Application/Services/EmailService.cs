@@ -25,9 +25,12 @@ public class EmailService : IEmailService
     {
         try
         {
-            var message = new MimeMessage();
+            var message = new MimeMessage();//se crea un objeto que representa el mensaje
+            //establece el remitente
             message.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.SenderEmail));
+            //se agrega un destinatario
             message.To.Add(new MailboxAddress(emailMessage.ToName, emailMessage.ToEmail));
+            
             message.Subject = emailMessage.Subject;
 
             var bodyBuilder = new BodyBuilder();

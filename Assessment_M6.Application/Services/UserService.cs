@@ -17,7 +17,11 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly TokenService _tokenService;
     private readonly IEmailService _emailService;
+    //Herrramienta para mejorar la legivilidad de los logs dice de que archivo es
+    //ejemplo: [INF] Assessment_M6.Application.Services.UserService: Obteniendo usuario por ID:
     private readonly ILogger<UserService> _logger;
+    
+    
 
     public UserService(
         IUserRepository userRepository, 
@@ -48,6 +52,7 @@ public class UserService : IUserService
                 _logger.LogInformation("Usuario con ID {Id} encontrado: {Email}", id, user.Email);
             }
             
+            //el ? es un operador ternario(if else comprimido
             return user == null ? null : MapToUserResponseDto(user);
         }
         catch (Exception ex)
@@ -98,6 +103,7 @@ public class UserService : IUserService
             
             _logger.LogInformation("Se encontraron {Count} usuarios", users.Count());
             
+            //es como un foreach abreviado
             return users.Select(MapToUserResponseDto);
         }
         catch (Exception ex)
@@ -122,6 +128,7 @@ public class UserService : IUserService
             
             var existingByUsername = (await _userRepository.GetAllUsers())
                 .FirstOrDefault(u => u.Username == userCreateDto.Username);
+            
             if (existingByUsername != null)
             {
                 _logger.LogWarning("El nombre de usuario {Username} ya está en uso", userCreateDto.Username);
@@ -240,6 +247,7 @@ public class UserService : IUserService
         }
     }
 
+    //esta funcion retorna dos valores
     public async Task<(string AccessToken, string RefreshToken)> AuthenticateAsync(LoginDto loginDto)
     {
         try
@@ -341,7 +349,10 @@ public class UserService : IUserService
                 throw new SecurityTokenException("Token inválido");
             }
             
-            
+            //valida si el claim es un numero
+            // si no lo es es el email esto es porque primero use el email como NameIdentifier
+            // entoces si el usuario cambia el email el token no funciona y genera problemas
+            // ademas email no es un identificador unico
             if (int.TryParse(userIdClaim, out int userId))
             {
                 user = await _userRepository.GetUserById(userId);
@@ -398,9 +409,9 @@ public class UserService : IUserService
 
     private string HashPassword(string password)
     {
-        using var sha256 = SHA256.Create();
-        var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-        return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+        using var sha256 = SHA256.Create(); //se crea instacia del algoritmo
+        var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password)); //se convierte la contraseña a bytes
+        return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();// se convierte el estring en exadecimal
     }
     
     private UserDtos.UserResponseDTO MapToUserResponseDto(User user)
