@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dTldTU9gy50=",
+  "dgSpecHash": "aePifetz/5Q=",
   "success": true,
   "projectFilePath": "/home/faragon/Desktop/repos/Assessment_M6/Assessment_M6.Api/Assessment_M6.Api.csproj",
   "expectedPackageFiles": [
@@ -43,6 +43,7 @@
     "/home/faragon/.nuget/packages/microsoft.identitymodel.protocols/8.0.1/microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
     "/home/faragon/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/8.0.1/microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
     "/home/faragon/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
+    "/home/faragon/.nuget/packages/microsoft.net.illink.tasks/9.0.11/microsoft.net.illink.tasks.9.0.11.nupkg.sha512",
     "/home/faragon/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
     "/home/faragon/.nuget/packages/mimekit/4.14.0/mimekit.4.14.0.nupkg.sha512",
     "/home/faragon/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
@@ -67,7 +68,10 @@
     "/home/faragon/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/faragon/.nuget/packages/system.security.cryptography.pkcs/8.0.1/system.security.cryptography.pkcs.8.0.1.nupkg.sha512",
     "/home/faragon/.nuget/packages/system.text.json/9.0.0/system.text.json.9.0.0.nupkg.sha512",
-    "/home/faragon/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
+    "/home/faragon/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512",
+    "/home/faragon/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/9.0.11/microsoft.netcore.app.runtime.linux-x64.9.0.11.nupkg.sha512",
+    "/home/faragon/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/9.0.11/microsoft.aspnetcore.app.runtime.linux-x64.9.0.11.nupkg.sha512",
+    "/home/faragon/.nuget/packages/microsoft.netcore.app.host.linux-x64/9.0.11/microsoft.netcore.app.host.linux-x64.9.0.11.nupkg.sha512"
   ],
   "logs": []
 }

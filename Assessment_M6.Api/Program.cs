@@ -119,6 +119,10 @@ builder.Services.AddCors(options =>
 // ===================== Construction and Pipeline =====================
 var app = builder.Build();
 
+// Add Heroku port binding
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://*:{port}");
+
 // Test the DB connection to have control over possible errors
 using (var scope = app.Services.CreateScope())
 {
@@ -144,11 +148,10 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local
         c.RoutePrefix = string.Empty;
     });
 }
-//Run this command to perform local tests if any issue appears:
-//export ASPNETCORE_ENVIRONMENT=Local dotnet run --project ProductCatalog.Api
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();

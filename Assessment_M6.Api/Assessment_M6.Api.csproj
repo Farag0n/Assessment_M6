@@ -25,6 +25,13 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <PublishAot>false</PublishAot>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Assessment_M6.Application\Assessment_M6.Application.csproj" />
     <ProjectReference Include="..\Assessment_M6.Infrastructure\Assessment_M6.Infrastructure.csproj" />
